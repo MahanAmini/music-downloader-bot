@@ -19,9 +19,9 @@ async def start_command(update: Update, context: CallbackContext) -> None:
     )
 
     keyboard = [
-        [InlineKeyboardButton("About", callback_data="about"),
-         InlineKeyboardButton("Developer", url="https://t.me/Mahan_aminy"),
-         InlineKeyboardButton("Guidance", callback_data="guide")]
+        [InlineKeyboardButton("About ❗", callback_data="about"),
+         InlineKeyboardButton("Developer ⚙️", url="https://t.me/Mahan_aminy"),
+         InlineKeyboardButton("Guidance 📖", callback_data="guide")]
     ]
     markup = InlineKeyboardMarkup(keyboard)
 

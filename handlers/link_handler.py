@@ -75,7 +75,7 @@ async def spotify_finder_handler(update: Update, context: ContextTypes.DEFAULT_T
         logger.info("Track hasn't been detected: %s ---- Fail\n", detected_link.track_id)
         await processing_msg.delete()
         await update.message.reply_text(f"❌ <b>Download Failed</b>\n\n"
-                                        f"<blockquote>🔗 Track Link: https://open.spotify.com/track/{detected_link.track_id}\n\n"
+                                        f"<blockquote expandable>🔗 Track Link: https://open.spotify.com/track/{detected_link.track_id}\n\n"
                                         f"⚠️ We Found The Track, But Audio Fetching Failed Due To Copyright Restrictions.\n\n"
                                         f"🔄 Please Try Again In A Few Moments, Or Try A Different Song!</blockquote>",
                                         parse_mode=ParseMode.HTML,

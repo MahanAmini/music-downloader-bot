@@ -1,7 +1,6 @@
-providers = ["python"]
- 
 [phases.setup]
-aptPkgs = ["ffmpeg", "curl", "unzip"]
+nixPkgs = ["...", "ffmpeg"]
+aptPkgs = ["curl", "unzip"]
  
 [phases.install]
 cmds = ["pip install --no-cache-dir -r requirements.txt"]

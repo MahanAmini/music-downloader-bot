@@ -34,8 +34,8 @@ async def spotify_finder_handler(update: Update, context: ContextTypes.DEFAULT_T
             await processing_msg.delete()
             await update.message.reply_text(
                 "❌ <b>No Matching Track Found</b>\n\n"
-                "<blockquote expandable>This Song Seems To Be Exclusive To Apple Music,\nAnd We Couldn't Find A Matching Version On Spotify.\n"
-                "💡 We Can Currently Only Download Tracks Available On Spotify.\nPlease Try A Different Song Or Link!</blockquote>",
+                "<blockquote expandable>🤖 This Song Seems To Be Exclusive To Apple Music,And We Couldn't Find A Matching Version On Spotify.\n"
+                "💡 We Can Currently Only Download Tracks Available On Spotify.\n\n🔗 Please Try A Different Song Or Link!</blockquote>",
                 parse_mode=ParseMode.HTML, )
             return
 
@@ -76,7 +76,7 @@ async def spotify_finder_handler(update: Update, context: ContextTypes.DEFAULT_T
         await processing_msg.delete()
         await update.message.reply_text(f"❌ <b>Download Failed</b>\n\n"
                                         f"<blockquote expandable>🔗 Track Link: https://open.spotify.com/track/{detected_link.track_id}\n\n"
-                                        f"⚠️ We Found The Track, But Audio Fetching Failed Due To Copyright Restrictions.\n\n"
+                                        f"⚠️ We Found The Track, But Audio Fetching Failed Due To Copyright Restrictions.\n"
                                         f"🔄 Please Try Again In A Few Moments, Or Try A Different Song!</blockquote>",
                                         parse_mode=ParseMode.HTML,
                                         link_preview_options=LinkPreviewOptions(is_disabled=True))

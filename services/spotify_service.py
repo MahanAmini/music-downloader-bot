@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 downloader_settings = {
     "output": "downloads/{artists} - {title}.{output-ext}",
     "threads": 2,
-    "audio_providers": ["youtube"],
+    "audio_providers": ["soundcloud"],
     "cookie_file": COOKIE_PATH if os.path.exists(COOKIE_PATH) else None,
 }
 
@@ -42,6 +42,7 @@ class SongMetadata:
     name: str
     artist: list[str]
     album: str
+    track_id: str
 
 
 def spotify_finder_service(track_id: str):
@@ -53,6 +54,7 @@ def spotify_finder_service(track_id: str):
             name=song.name,
             artist=song.artists,
             album=song.album_name,
+            track_id=track_id,
         )
         logger.info("Spotify - track_id: %s - SongName: %s", track_id, song.name)
 

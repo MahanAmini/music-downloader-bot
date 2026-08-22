@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 downloader_settings = {
     "output": "downloads/{artists} - {title}.{output-ext}",
-    "threads": 2,
+    "threads": 4,
     "audio_providers": ["youtube"],
     "cookie_file": COOKIE_PATH if os.path.exists(COOKIE_PATH) else None,
 }

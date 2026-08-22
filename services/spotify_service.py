@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from spotdl.types.song import Song
 from spotdl.utils.spotify import SpotifyClient, SpotifyError
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET,PROXY_URL,COOKIE_PATH
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, PROXY_URL, COOKIE_PATH
 from spotdl.download.downloader import Downloader
 
 SpotifyClient.init(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET)
@@ -30,12 +30,18 @@ if yt_dlp_args:
 
 _executor = ThreadPoolExecutor(max_workers=1)
 _downloader = None
+_current_provider = None
 
-def _get_downloader() -> Downloader:
-    global _downloader
-    if _downloader is None:
+def _get_downloader(provider: str) -> Downloader:
+    global _downloader, _current_provider
+    if _downloader is None or _current_provider != provider:
+        if _downloader is not None:
+            _downloader.progress_handler.close()
+        downloader_settings["audio_providers"] = [provider]
         _downloader = Downloader(settings=downloader_settings)
+        _current_provider = provider
     return _downloader
+
 
 @dataclass
 class SongMetadata:
@@ -45,8 +51,8 @@ class SongMetadata:
     track_id: str
 
 
-def spotify_finder_service(track_id: str):
-    downloader = _get_downloader()
+def spotify_finder_service(track_id: str, provider: str = "youtube"):
+    downloader = _get_downloader(provider)
 
     try:
         song = Song.from_url(f"https://open.spotify.com/track/{track_id}")
@@ -62,13 +68,15 @@ def spotify_finder_service(track_id: str):
             song_obj, file_path = downloader.download_song(song)
         except Exception as e:
             logger.exception("Download failed for track %s: %s", track_id, e)
-            return None
+            file_path = None
 
         if file_path and os.path.exists(file_path):
             logger.info("Successfully downloaded track %s to %s", track_id, file_path)
             return metadata, str(file_path)
 
-        logger.info("Failed to download track %s", track_id)
+        logger.info("Download failed for track %s with provider %s", track_id, provider)
+        if provider != "soundcloud":
+            return spotify_finder_service(track_id, provider="soundcloud")
         return None
 
     except SpotifyError as e:
@@ -77,6 +85,7 @@ def spotify_finder_service(track_id: str):
     except Exception as e:
         logger.error("Unexpected error for track %s: %s", track_id, e)
         return None
+
 
 def run_spotify_finder_in_executor(loop: asyncio.AbstractEventLoop, track_id: str):
     return loop.run_in_executor(_executor, spotify_finder_service, track_id)

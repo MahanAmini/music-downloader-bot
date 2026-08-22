@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from spotdl.types.song import Song
 from spotdl.utils.spotify import SpotifyClient, SpotifyError
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, COOKIE_PATH, #PROXY_URL
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, COOKIE_PATH, PROXY_URL
 from spotdl.download.downloader import Downloader
 
 SpotifyClient.init(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET)

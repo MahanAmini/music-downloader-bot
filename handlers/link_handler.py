@@ -42,10 +42,6 @@ async def spotify_finder_handler(update: Update, context: ContextTypes.DEFAULT_T
     loop = asyncio.get_running_loop()
     result = await run_spotify_finder_in_executor(loop, detected_link.track_id)
     
-    while result is None:
-        await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="upload_document")
-        await asyncio.sleep(4)
-        
     if result:
         metadata, file_path = result
         logger.info("Track has been detected: %s ---- Successful\n", metadata.name)

@@ -27,7 +27,7 @@ async def spotify_finder_handler(update: Update, context: ContextTypes.DEFAULT_T
     gif_file_id = "CgACAgQAAxkBAAEt6cRqiiz5Y9qGKdQB-rIuiL85i1fkiAACUwoAAnhZSVBfRb500BfMUT0E"
     processing_msg = await update.message.reply_animation(animation=gif_file_id,
                                                           caption="⏳ Downloading Track, Please Wait...\n⏱ Estimated Time: 30s – 3m\n📢 We’ll Update You If The Download Gets Canceled.",
-                                                          reply_to_message_id=query.message.message_id)
+                                                          reply_to_message_id=update.message.message_id)
 
     if detected_link.platform == Platform.APPLE_MUSIC and detected_link.track_id:
         detected_link.track_id = await asyncio.to_thread(apple_music, detected_link.track_id)

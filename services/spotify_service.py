@@ -71,7 +71,7 @@ def spotify_finder_service(track_id: str, provider: str = "youtube"):
             file_path = None
 
         if file_path and os.path.exists(file_path):
-            logger.info("Successfully downloaded track %s to %s from ----> s%", track_id, file_path, provider)
+            logger.info("Successfully downloaded track %s to %s from ----> %s", track_id, file_path, provider)
             return metadata, str(file_path)
 
         logger.info("Download failed for track %s with provider %s", track_id, provider)

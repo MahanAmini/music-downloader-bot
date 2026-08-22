@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor
 from spotdl.types.song import Song
 from spotdl.utils.spotify import SpotifyClient, SpotifyError
-from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, PROXY_URL, COOKIE_PATH
+from config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, COOKIE_PATH, #PROXY_URL
 from spotdl.download.downloader import Downloader
 
 SpotifyClient.init(client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET)
@@ -20,8 +20,8 @@ downloader_settings = {
 }
 
 yt_dlp_args = []
-if PROXY_URL:
-    yt_dlp_args.append(f"--proxy {PROXY_URL}")
+#if PROXY_URL:
+#    yt_dlp_args.append(f"--proxy {PROXY_URL}")
 if os.path.exists(COOKIE_PATH):
     yt_dlp_args.append(f"--cookies {COOKIE_PATH}")
 

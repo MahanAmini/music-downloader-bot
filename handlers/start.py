@@ -48,7 +48,7 @@ content = {
     'guide' : (
         "🤖 How To Use <b>GassLight</b> Bot\n\n"
         "🎵 Step 1: Send Your Spotify Or Apple Music Link.\n\n"
-        "⏳ Step 2: Wait Just A Moment. The Process Takes Between <b><u>30</u></b> <b>Seconds</b> And <b><u>3</u></b> <b>Minutes</b>.\n\n"
+        "⏳ Step 2: Wait Just A Moment. The Process Takes Between <b><u>30</u></b> <b>Seconds</b> To <b><u>3</u></b> <b>Minutes</b>.\n\n"
         "🎧 Step 3: Receive Your High-Quality Audio File Instantly.\n\n\n"
         "⚠️ Note: Sit Back And Relax! No Extra Steps Are Needed. If Your Link Is Invalid, The Bot Will Notify You Immediately."
     ),

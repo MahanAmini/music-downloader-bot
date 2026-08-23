@@ -38,7 +38,7 @@ async def animate_loading(message, stop_event: asyncio.Event):
             current_frame = frames[idx % len(frames)]
             new_text = f"{current_frame}\n⏳Timer : {sec} Secend\n{base_text}"
 
-            await message.edit_text(new_text)
+            await message.edit_caption(caption=new_text)
             idx += 1
             sec += 2
         except BadRequest as e:
